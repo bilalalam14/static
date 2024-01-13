@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    body {
+        font-family: 'Exo', sans-serif;
+        background: linear-gradient(-45deg, #43f76a, #3be6c4, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        margin-top: 50px;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .main {
+        display: flex;
+        justify-content: space-evenly;
+        row-gap: 2px;
+        padding: 20px;
+        margin: 20px;
+    }
+
+    p {}
+
+    .calculator {
+        width: 30%;
+        background-color: aliceblue;
+        opacity: 0.7;
+        /* border: solid; */
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+        border-radius: 5px;
+    }
+
+    .bulb {
+        width: 30%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .bulbimage {}
+
+    img {
+        width: 80%;
+    }
+
+    .calculator {
+        padding-left: 35px;
+        padding-top: 35px;
+    }
+
+    h1, h2 {
+        font-size: 36px;
+        font-weight: bolder;        
+        text-align: center;
+        color: aliceblue;
+        text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -4px 10px rgba(255,255,255,0.3);
+    }
+
+    h1{
+        font-size: 48px;
+        font-weight: bolder;
+        color: aliceblue;
+    }
+
+    p {
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <h1>Welcome!</h1>
+    <br>
+    <hr>
+    <h2>An even number turns the light on</h2>
+    <br>
+    <div class="main">
+
+        <div class="calculator">
+            <p>Enter number to operate</p>
+            <input type="text" id="num1">
+            <p>Enter operation</p>
+            <input type="text" id="operation">
+            <p>Enter the number to with</p>
+            <input type="text" id="num2"> <br> <br>
+            <button onclick="calculate()">Calculate</button>
+            <h3 class="result"></h3>
+        </div>
+
+        <div class="bulb">
+            <div class="bulbimage">
+                <img src="/off.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let num1 = 0
+        let num2 = 0
+        let operator = 0
+        let output = 0
+
+        function calculate() {
+            let num1 = document.querySelector("#num1").value;
+            let num2 = document.querySelector("#num2").value;
+            let operator = document.querySelector("#operation").value;
+            let output = 0;
+
+            if (operator === "*") {
+                output = +num1 * +num2;
+                output = Math.round(output * 100) / 100;
+            } else if (operator === "/") {
+                output = +num1 / +num2;
+                output = Math.round(output * 100) / 100;
+            } else if (operator === "+") {
+                output = +num1 + +num2;
+                output = Math.round(output * 100) / 100;
+            } else if (operator === "-") {
+                output = +num1 - +num2;
+                output = Math.round(output * 100) / 100;
+            } else {
+                output = "Get out of here! and study some maths first";
+            }
+
+            if (isNaN(output) === true) {
+                output = "Get out of here! and study some maths first";
+            }
+
+            if (output % 2 === 0) {
+                document.querySelector(".bulbimage").innerHTML = `<img src="/on.png">`
+            } else {
+                document.querySelector(".bulbimage").innerHTML = `<img src="/off.png">`
+            }
+
+            document.querySelector(".result").innerHTML = output;
+        }
+
+
+
+    </script>
+</body>
+
+</html>
